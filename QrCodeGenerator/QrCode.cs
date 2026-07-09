@@ -50,6 +50,7 @@ namespace Net.Codecrete.QrCodeGenerator
     /// <li><see cref="EncodeTextAdvanced"/></li>
     /// <li><see cref="EncodeBinary"/></li>
     /// <li><see cref="EncodeTextInMultipleCodes"/></li>
+    /// <li><see cref="EncodeTextInMultipleBalancedCodes"/></li>
     /// </ul>
     /// <para>
     /// For even more control about the QR code contents, first create the data
@@ -212,6 +213,64 @@ namespace Net.Codecrete.QrCodeGenerator
             
             return qrCodes.ConvertAll(segments =>
                 QrCodeBuilder.Build(segments, (int) ecl, minVersion: version, maxVersion: version));
+        }
+
+        /// <summary>
+        /// Creates multiple evenly balanced QR codes representing the specified text.
+        /// <para>
+        /// The result will consist of the least number of QR codes needed to encode the text
+        /// with the given error correction level, using a version (size) between
+        /// <paramref name="minVersion"/> and <paramref name="maxVersion"/>.
+        /// If multiple QR codes are required, <em>Structured Append</em> data is included to link them.
+        /// </para>
+        /// <para>
+        /// Compared to <see cref="EncodeTextInMultipleCodes"/>, this method distributes the payload
+        /// evenly among the codes instead of filling all but the last one to capacity. It first
+        /// determines the least number of codes required, then reduces the shared version as much as
+        /// possible (down to <paramref name="minVersion"/>) while still fitting that number of codes,
+        /// and finally spreads the payload so the fullest code is as empty as possible. All resulting
+        /// QR codes use the same version. The error correction level is increased if possible (boosted)
+        /// for each QR code separately. So the resulting QR codes can use different error correction
+        /// levels.
+        /// </para>
+        /// <para>
+        /// If the text can be losslessly encoded in Latin-1, the encoding will be used and no
+        /// extended channel indicators (ECI) will be added as Latin-1 is the default QR code text encoding.
+        /// Otherwise, the text will be encoded in UTF-8, and the required ECI will be added to each QR code.
+        /// UTF-8 text is split at character boundaries, not in the middle of a multibyte character.
+        /// </para>
+        /// <para>
+        /// If the text fits into a single QR code, a single standalone code without structured append
+        /// data is returned, using the smallest version at least <paramref name="minVersion"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="text">The text to be encoded. The full range of Unicode characters may be used.</param>
+        /// <param name="ecl">The minimum error correction level to use.</param>
+        /// <param name="minVersion">The minimum version (size) to use. Default is 10.</param>
+        /// <param name="maxVersion">The maximum version (size) to use. Default is 29.</param>
+        /// <returns>A list of QR codes representing the specified text.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="text"/> is <c>null</c>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="minVersion"/> or <paramref name="maxVersion"/> is out of range, or <paramref name="minVersion"/> is greater than <paramref name="maxVersion"/>.</exception>
+        /// <exception cref="DataTooLongException">The text is too long to fit the maximum of 16 QR codes with the given parameters.</exception>
+        public static List<QrCode> EncodeTextInMultipleBalancedCodes(string text, Ecc ecl, int minVersion = 10, int maxVersion = 29)
+        {
+            Objects.RequireNonNull(text, nameof(text));
+            ValidateVersion(minVersion, maxVersion);
+
+            var (qrCodes, version) = StructuredAppend.BuildBalancedFromText(text, minVersion, maxVersion, ecl);
+
+            if (qrCodes.Count == 1)
+            {
+                // fits in a single QR code: emit it standalone (without structured append data),
+                // using the smallest version at least minVersion.
+                var segments = DataSegment.FromText(text, version: maxVersion);
+                return new List<QrCode>
+                    { QrCodeBuilder.Build(segments, (int)ecl, minVersion: minVersion, maxVersion: maxVersion) };
+            }
+
+            // Keep every code identical: same version and same ecl (possibly boosted).
+            return qrCodes.ConvertAll(segments =>
+                QrCodeBuilder.Build(segments, (int)ecl, minVersion: version, maxVersion: version));
         }
 
         /// <summary>
