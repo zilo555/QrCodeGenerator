@@ -93,14 +93,14 @@ QR Code Generator for .NET requires a .NET implementation compatible with .NET S
 
 ### Raster Images / Bitmaps
 
-Starting with .NET 6, *System.Drawing* is only supported on Windows operating system and thus cannot be used for multi-platform libraries like this one. Therefore, `ToBitmap()` has been removed.
+Starting with .NET 6, *System.Drawing* is only supported on the Windows operating system and thus cannot be used for multi-platform libraries like this one. Therefore, `ToBitmap()` has been removed.
 
-Two raster bitmap formats are supported with the need for additional libraries:
+Two raster bitmap formats are supported without the need for additional libraries:
 
 - *PNG*: See [`QrCode.ToPngBitmap()`](xref:Net.Codecrete.QrCodeGenerator.QrCode.ToPngBitmap(System.Int32,System.Int32,System.Int32,System.Int32))
 - *BMP*: See [`QrCode.ToBmpBitmap()`](xref:Net.Codecrete.QrCodeGenerator.QrCode.ToBmpBitmap(System.Int32,System.Int32,System.Int32,System.Int32))
 
-These methods are limited, e.g. with regards to the size of the generated image.
+These methods are limited, e.g. with regard to the size of the generated image.
 For more advanced and more efficient ways to generate different raster image formats:
 
 - Select one of the imaging libraries below
@@ -110,11 +110,11 @@ For more advanced and more efficient ways to generate different raster image for
 
 | Library | Recommendation | NuGet dependencies | Extension file |
 | ------- | -------------- | ------------------ | -------------- |
-| **System.Drawing** | For Windows only projects | `System.Drawing.Common` | [QrCodeBitmapExtensions.cs](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-SkiaSharp/QrCodeBitmapExtensions.cs) |
+| **System.Drawing** | For Windows only projects | `System.Drawing.Common` | [QrCodeBitmapExtensions.cs](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-System-Drawing/QrCodeBitmapExtensions.cs) |
 | **SkiaSharp** | For macOS, Linux, iOS, Android and multi-platform projects | `SkiaSharp` and `SkiaSharp.NativeAssets.Linux` (for Linux only) | [QrCodeBitmapExtensions.cs](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-SkiaSharp/QrCodeBitmapExtensions.cs) |
-| **ImageSharp** | Alternative for multi-platform projects. Might require a commercial license. | `SixLabors.ImageSharp.Drawing` | [QrCodeBitmapExtensions.cs](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/QrCodeBitmapExtensions.cs) |
+| **ImageSharp** | Alternative for multi-platform projects. Might require a commercial license. | `SixLabors.ImageSharp.Drawing` | [QrCodeBitmapExtensions.cs](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-ImageSharp/QrCodeBitmapExtensions.cs) |
 
-Using these extension methods, generating PNG images is straight-forward:
+Using these extension methods, generating PNG images is straightforward:
 
 <pre>
 <code class="lang-csharp hljs">using Net.Codecrete.QrCodeGenerator;

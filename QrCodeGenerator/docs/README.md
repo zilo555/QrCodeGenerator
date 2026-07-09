@@ -5,7 +5,7 @@ Open-source library for generating QR codes from text strings and byte arrays.
 The library is built for .NET Standard 2.0 and therefore runs on most modern .NET platforms (.NET Core, .NET Framework, Mono etc.) including .NET 6 on all platforms.
 
 It started as a C# port of [Project Nayuki's](https://www.nayuki.io/page/qr-code-generator-library) Java version.
-Version 3 is a complete rewrite of the library, and it is more standard compliant
+Version 3 is a complete rewrite of the library, and it is more standard-compliant
 and about 10x faster than the original implementation.
 
 
@@ -111,14 +111,14 @@ QR Code Generator for .NET requires a .NET implementation compatible with .NET S
 
 ### Raster Images / Bitmaps
 
-Starting with .NET 6, *System.Drawing* is only supported on Windows operating system and thus cannot be used for multi-platform libraries like this one. Therefore, `ToBitmap()` has been removed.
+Starting with .NET 6, *System.Drawing* is only supported on the Windows operating system and thus cannot be used for multi-platform libraries like this one. Therefore, `ToBitmap()` has been removed.
 
-Two raster bitmap formats are supported with the need for additional libraries:
+Two raster bitmap formats are supported without the need for additional libraries:
 
 - *PNG*: See `QrCode.ToPngBitmap()`
 - *BMP*: See `QrCode.ToBmpBitmap()`
 
-These methods are limited, e.g. with regards to the size of the generated image.
+These methods are limited, e.g. with regard to the size of the generated image.
 For more advanced and more efficient ways to generate different raster image formats:
 
 - Select one of the imaging libraries below
@@ -131,7 +131,7 @@ For more advanced and more efficient ways to generate different raster image for
 | **SkiaSharp** | For macOS, Linux, iOS, Android and multi-platform projects | `SkiaSharp` and `SkiaSharp.NativeAssets.Linux` (for Linux only) | [QrCodeBitmapExtensions.cs](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-SkiaSharp/QrCodeBitmapExtensions.cs) |
 | **ImageSharp** | Alternative for multi-platform projects. Might require a commercial license. | `SixLabors.ImageSharp.Drawing` | [QrCodeBitmapExtensions.cs](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-ImageSharp/QrCodeBitmapExtensions.cs) |
 
-Using these extension methods, generating PNG images is straight-forward:
+Using these extension methods, generating PNG images is straightforward:
 
 ```csharp
 using Net.Codecrete.QrCodeGenerator;
@@ -165,13 +165,13 @@ Several example projects demonstrate how to generate QR code with different fram
 
 - [Demo-VCard](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-VCard): Demonstrates how contact data (similar to business cards) can be saved in a QR Code using the VCard standard.
 
-- [Demo-System-Drawing](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-System-Drawing): Demonstrates how a QR code can be saved a PNG file, using the *System.Drawing* classes, which have become a Windows only technology starting with .NET 6.
+- [Demo-System-Drawing](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-System-Drawing): Demonstrates how a QR code can be saved as a PNG file, using the *System.Drawing* classes, which have become a Windows-only technology starting with .NET 6.
 
-- [Demo-SkiaSharp](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-SkiaSharp): Demonstrates how a QR code can be saved a PNG file, using the SkiaSharp multi-platform raster image library.
+- [Demo-SkiaSharp](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-SkiaSharp): Demonstrates how a QR code can be saved as a PNG file, using the SkiaSharp multi-platform raster image library.
 
-- [Demo-ImageSharp](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-ImageSharp): Demonstrates how a QR code can be saved a PNG file, using the ImageSharp raster image library. Additionally, a QR code with an image in the center is created.
+- [Demo-ImageSharp](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-ImageSharp): Demonstrates how a QR code can be saved as a PNG file, using the ImageSharp raster image library. Additionally, a QR code with an image in the center is created.
 
-- [Demo-ImageMagick](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-ImageMagick): Demonstrates how a QR code can be saved a PNG file, using the Magick.NET image manipulation library (based on ImageMagick).
+- [Demo-ImageMagick](https://github.com/manuelbl/QrCodeGenerator/blob/v3.0.0/Demo-ImageMagick): Demonstrates how a QR code can be saved as a PNG file, using the Magick.NET image manipulation library (based on ImageMagick).
 
 
 ## Upgrade from version 2.x to version 3.x
@@ -192,6 +192,6 @@ sufficient for your use case, it is still possible to create the data segments
 manually. The class is now called `DataSegment` instead of `QrSegment`.
 
 The new library version no longer allows to select a specific data masking pattern
-as it can lead to QR codes that a very difficult to scan and violate the standard.
+as it can lead to QR codes that are very difficult to scan and violate the standard.
 For backward compatibility, the parameter is still present in one of the methods.
 But it is ignored.
