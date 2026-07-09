@@ -42,34 +42,56 @@ jobs:
         run: |
           $pkg = Resolve-Path QrCodeGenerator\bin\Release\Net.Codecrete.QrCodeGenerator.*.nupkg
           nuget push $pkg -Source Local
+          $version = $pkg.Path -replace '.*Net\.Codecrete\.QrCodeGenerator\.(.+)\.nupkg$', '$1'
+          "PkgVersion=$version" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - name: Build Basic-Example
-        run: dotnet build
+        run: |
+          dotnet add package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Basic-Example
       - name: Build Demo-ImageSharp
-        run: dotnet build
+        run: |
+          dotnet add package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Demo-ImageSharp
       - name: Build Demo-ASP.NET-Core
-        run: dotnet build
+        run: |
+          dotnet add package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Demo-ASP.NET-Core
       - name: Build Demo-ImageMagick
-        run: dotnet build
+        run: |
+          dotnet add package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Demo-ImageMagick
       - name: Build Demo-SkiaSharp
-        run: dotnet build
+        run: |
+          dotnet add package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Demo-SkiaSharp
       - name: Build Demo-System-Drawing
-        run: dotnet build
+        run: |
+          dotnet add package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Demo-System-Drawing
       - name: Build Demo-VCard
-        run: dotnet build
+        run: |
+          dotnet add package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Demo-VCard
       - name: Build Demo-WindowsPresentationFoundation
-        run: dotnet build
+        run: |
+          dotnet add package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Demo-WindowsPresentationFoundation
       - name: Build Demo-WinForms
-        run: dotnet build
+        run: |
+          dotnet add package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Demo-WinForms
       - name: Build Demo-WinUI
-        run: dotnet build
+        run: |
+          dotnet add Demo-WinUI\Demo-WinUI.csproj package Net.Codecrete.QrCodeGenerator --version $env:PkgVersion --source Local
+          dotnet build
         working-directory: Demo-WinUI
