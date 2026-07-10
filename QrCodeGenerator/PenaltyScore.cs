@@ -10,11 +10,11 @@ namespace Net.Codecrete.QrCodeGenerator
     /// <summary>
     /// Information about the penalty score of a data mask pattern.
     /// <para>
-    /// QR code use one out of eight patterns to improve the readability of the code.
+    /// QR codes use one of eight patterns to improve the readability of the code.
     /// The penalty score measures how difficult it is to read a QR code with a given pattern.
     /// </para>
     /// <para>
-    /// The penaly score information can be collected for analysis purposes, but it is not used by the library itself.
+    /// The penalty score information can be collected for analysis purposes, but it is not used by the library itself.
     /// If the information is collected, the QR code generation will be slower as the library needs to
     /// fully calculate the penalty score even if it is already clear that the pattern is not the best one.
     /// </para>
@@ -46,7 +46,7 @@ namespace Net.Codecrete.QrCodeGenerator
         /// </summary>
         public int VerticalFinderPatterns { get; set; }
         /// <summary>
-        /// Penalty score for an inbalance of the number of dark and light modules.
+        /// Penalty score for an imbalance of the number of dark and light modules.
         /// </summary>
         public int ColorBalance { get; set; }
         /// <summary>

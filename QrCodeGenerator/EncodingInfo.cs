@@ -7,7 +7,7 @@ namespace Net.Codecrete.QrCodeGenerator
     /// <para>
     /// The details can be collected during QR code generation for analysis purposes,
     /// but they are not used by the library itself. Collecting the information will make
-    /// the QR code generation slower as the library will fully calcuate the penalty score for
+    /// the QR code generation slower as the library will fully calculate the penalty score for
     /// all data mask patterns, even if it is already clear that the pattern is not the best one.
     /// </para>
     /// </summary>

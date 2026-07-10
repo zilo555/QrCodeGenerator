@@ -28,14 +28,14 @@ namespace Net.Codecrete.QrCodeGenerator
     /// Versions 1 (smallest) to 40 (largest) are available.
     /// </para>
     /// <para>
-    /// QR codes includes error correction data to ensure the QR code
+    /// QR codes include error correction data to ensure the QR code
     /// can be read despite difficult lighting conditions (e.g. reflections),
     /// dirt or partially covered pixels. Four error correction levels are
     /// available. The highest can recover about 30% of missing or damaged data.
     /// </para>
     /// <para>
     /// A QR code instance can be converted to a PNG (<see cref="ToPngBitmap"/>),
-    /// SVG (<see cref="ToSvgString"/>) or BMP <see cref="ToBmpBitmap"/>) image.
+    /// SVG (<see cref="ToSvgString"/>) or BMP (<see cref="ToBmpBitmap"/>) image.
     /// Or the QR code can be drawn or printed with custom code by either
     /// processing a list of rectangles covering the dark modules (<see cref="ToRectangles"/>),
     /// or by querying the color of individual modules with <see cref="GetModule"/>.
@@ -287,7 +287,7 @@ namespace Net.Codecrete.QrCodeGenerator
         /// </summary>
         /// <param name="data">The binary data to encode.</param>
         /// <param name="ecl">The minimum error correction level to use.</param>
-        /// <param name="omitEci">If <c>true</c>, noe ECI is inserted to indicate binary data.</param>
+        /// <param name="omitEci">If <c>true</c>, no ECI is inserted to indicate binary data.</param>
         /// <returns>A QR code representing the specified data.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="data"/> is <c>null</c>.</exception>
         /// <exception cref="DataTooLongException">The specified data is too long to fit in the largest QR code size (version)
@@ -311,10 +311,10 @@ namespace Net.Codecrete.QrCodeGenerator
         /// </para>
         /// </summary>
         /// <param name="segments">The segments to encode.</param>
-        /// <param name="ecl">The minimal or fixed error correction level to use .</param>
+        /// <param name="ecl">The minimal or fixed error correction level to use.</param>
         /// <param name="minVersion">The minimum version (size) of the QR code (between 1 and 40).</param>
         /// <param name="maxVersion">The maximum version (size) of the QR code (between 1 and 40).</param>
-        /// <param name="boostEcl">If <c>true</c> the ECC level wil be increased if it can be achieved
+        /// <param name="boostEcl">If <c>true</c>, the ECC level will be increased if it can be achieved
         /// without increasing the size (version).</param>
         /// <returns>A QR code representing the segments.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="segments"/> or any list element is <c>null</c>.</exception>
@@ -383,7 +383,7 @@ namespace Net.Codecrete.QrCodeGenerator
         public Ecc ErrorCorrectionLevel { get; }
 
         /// <summary>
-        /// The index of the mask pattern used fort this QR code (between 0 and 7).
+        /// The index of the mask pattern used for this QR code (between 0 and 7).
         /// </summary>
         /// <value>The mask pattern index.</value>
         public int Mask { get; }
@@ -445,6 +445,7 @@ namespace Net.Codecrete.QrCodeGenerator
         /// <param name="border">The border width, as a factor of the module (QR code pixel) size.</param>
         /// <param name="foreground">The foreground color. Defaults to black.</param>
         /// <param name="background">The background color. Defaults to white.</param>
+        /// <returns>The SVG image, as a string.</returns>
         public string ToSvgString(int border, string foreground = "#000000", string background = "#ffffff")
         {
             return SvgBuilder.ToSvgString(this, border, foreground, background);
@@ -525,7 +526,7 @@ namespace Net.Codecrete.QrCodeGenerator
         }
 
         /// <summary>
-        /// Creates bitmap in the PNG format data using specified foreground and background colors for dark and light modules.
+        /// Creates a bitmap in the PNG format, using the specified foreground and background colors for dark and light modules.
         /// </summary>
         /// <param name="border">The border width, as a factor of the module (QR code pixel) size. Defaults to 0.</param>
         /// <param name="scale">The width and height, in pixels, of each module. Defaults to 1.</param>

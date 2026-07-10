@@ -230,7 +230,7 @@ namespace Net.Codecrete.QrCodeGenerator
         /// </summary>
         /// <param name="data">The binary data to encode.</param>
         /// <param name="eci">The extended character set indicator segment to add.
-        /// If <see cref="ECI.None"/> is specified, the ECI segment if omitted.
+        /// If <see cref="ECI.None"/> is specified, the ECI segment is omitted.
         /// If <c>null</c> is specified, the ECI designator for binary data is used.</param>
         /// <param name="version">The QR code version.</param>
         /// <param name="considerKanjiMode">Controls if Kanji mode is considered for data segments.</param>

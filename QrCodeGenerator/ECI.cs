@@ -183,7 +183,7 @@ namespace Net.Codecrete.QrCodeGenerator
         public static readonly ECI Latin8 = new ECI(16);
         
         /// <summary>
-        /// Latin-8/Celtic / ISO/IEC 8859-14 encoding.
+        /// Latin-8 / ISO/IEC 8859-14 (Celtic) encoding.
         /// </summary>
         public static readonly ECI Iso8859_14 = Latin8;
         
@@ -307,6 +307,7 @@ namespace Net.Codecrete.QrCodeGenerator
         /// Creates an ECI designator with the given value.
         /// </summary>
         /// <param name="value">The ECI designator value.</param>
+        /// <returns>The ECI designator.</returns>
         public static ECI FromValue(int value)
         {
             return new ECI(value);

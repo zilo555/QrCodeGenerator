@@ -18,7 +18,7 @@ namespace Net.Codecrete.QrCodeGenerator
     /// <ul>
     ///   <li>Decrease the error correction level (see <see cref="QrCode.Ecc"/>).</li>
     ///   <li>Increase the <c>maxVersion</c> argument if the method provides control over the version.
-    ///       If not, the method tried up to the maximum version of 40.</li>
+    ///       If not, the method tries up to the maximum version of 40.</li>
     ///   <li>Reduce the amount of text or binary data.</li>
     /// </ul>
     /// </remarks>
